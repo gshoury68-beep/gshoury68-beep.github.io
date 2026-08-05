@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="ForexED — Education-only Forex trading courses and webinars. No investment, no advice." />
+  <title>ForexED — Forex Trading Education (Education Only)</title>
+
+  <!-- Social preview -->
+  <meta property="og:title" content="ForexED — Forex Trading Education" />
+  <meta property="og:description" content="Education-only Forex trading courses, webinars, and resources. Book a session today." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-1: #071018;
+      --bg-2: #0b1620;
+      --card: rgba(255,255,255,0.03);
+      --muted: #94a3b8;
+      --teal: #2dd4bf;
+      --accent-900: rgba(45,212,191,0.12);
+      --glass: rgba(255,255,255,0.03);
+      --maxw: 1100px;
+    }
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    /* layout */
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
+    header{position:sticky;top:0;backdrop-filter:blur(6px);background:linear-gradient(180deg, rgba(7,12,16,0.65), rgba(7,12,16,0.45));border-bottom:1px solid rgba(255,255,255,0.03);z-index:30}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{font-weight:700;color:var(--teal);font-size:20px;letter-spacing:0.2px}
+    nav a{color:inherit;text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:500}
+    nav a:hover{background:var(--glass);color:var(--teal)}
+
+    .nav-links{display:flex;gap:6px;align-items:center}
+
+    main{padding:28px 0}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:24px;
+      align-items:center;
+      padding:36px 0;
+    }
+    .hero-card{
+      background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:28px;
+      box-shadow:0 6px 30px rgba(2,6,23,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .hero h1{font-size:2.25rem;margin:0 0 12px 0;line-height:1.02}
+    .hero p.lead{color:var(--muted);margin:0 0 18px 0}
+
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:10px;border:none;cursor:pointer;font-weight:700;
+    }
+    .btn-primary{background:var(--teal);color:#042024}
+    .btn-ghost{background:transparent;color:var(--teal);border:1px solid rgba(255,255,255,0.04)}
+
+    /* features */
+    .grid-3{display:grid;gap:14px;margin-top:18px}
+    .card{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+    .card h3{margin:0 0 6px 0;color:#fff}
+    .card p{color:var(--muted);margin:0;font-size:0.95rem}
+
+    /* sections */
+    section{padding:36px 0}
+    section h2{color:var(--teal);margin:0 0 12px 0;font-size:1.4rem}
+    .muted{color:var(--muted)}
+
+    /* contact form */
+    form {display:grid;gap:10px;margin-top:12px}
+    input,textarea{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);padding:12px;border-radius:10px;color:inherit}
+    .small{font-size:0.9rem;color:var(--muted)}
+
+    /* footer */
+    footer{border-top:1px solid rgba(255,255,255,0.03);padding:24px 0;margin-top:30px;color:var(--muted)}
+    .footer-grid{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+    /* responsive */
+    @media(min-width:900px){
+      .hero{grid-template-columns:1fr 460px}
+      .grid-3{grid-template-columns:repeat(3,1fr)}
+    }
+    @media(max-width:899px){
+      .nav-links{display:none}
+      .mobile-nav-btn{display:inline-flex}
+    }
+
+    /* mobile nav */
+    .mobile-nav-btn{display:none;background:transparent;border:1px solid rgba(255,255,255,0.03);padding:8px;border-radius:10px;color:var(--muted)}
+    .mobile-menu{display:none;padding:12px;margin-top:8px;background:rgba(255,255,255,0.02);border-radius:10px}
+    .show{display:block}
+    /* small helpers */
+    .muted-2{color:#9fb8c8}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav-inner">
+      <div class="brand">ForexED</div>
+      <nav>
+        <div class="nav-links" id="navLinks">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#webinars">Webinars</a>
+          <a href="#contact">Contact</a>
+          <a href="#signup" class="btn btn-primary" style="padding:8px 12px">Book</a>
+        </div>
+
+        <button class="mobile-nav-btn" id="mobileBtn" aria-expanded="false">☰</button>
+        <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+          <a href="#home">Home</a><br>
+          <a href="#about">About</a><br>
+          <a href="#services">Services</a><br>
+          <a href="#webinars">Webinars</a><br>
+          <a href="#contact">Contact</a><br>
+          <a href="#signup" class="btn btn-primary" style="display:inline-block;margin-top:8px">Book</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <div class="wrap hero">
+      <div class="hero-card">
+        <h1>Master Forex Trading — education only, no advice</h1>
+        <p class="lead">Modern, practical Forex trading education. Live webinars, recorded lessons, and booking for one-on-one educational sessions. We provide training only—no investment services or financial advice.</p>
+        <div class="cta-row">
+          <a href="#signup" class="btn btn-primary">Book a Session</a>
+          <a href="#webinars" class="btn btn-ghost">See Webinars</a>
+        </div>
+
+        <div class="grid-3" style="margin-top:20px">
+          <div class="card">
+            <h3>Live Webinars</h3>
+            <p>Interactive walkthroughs on strategy, chart analysis, and practical execution.</p>
+          </div>
+          <div class="card">
+            <h3>On-demand</h3>
+            <p>Recorded lessons and guides to learn at your own pace.</p>
+          </div>
+          <div class="card">
+            <h3>Community Chat</h3>
+            <p>Live chat support for learners and Q&A during webinars.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside style="display:flex;flex-direction:column;gap:14px">
+        <div class="hero-card" aria-labelledby="bookHeading">
+          <h3 id="bookHeading" style="margin-top:0">Book a Session</h3>
+          <p class="muted">Pick a date & time for an educational session (no advice). Replace the Calendly link below with your Calendly URL.</p>
+
+          <!-- Calendly inline widget: replace data-url with your calendly link -->
+          <div style="border-radius:10px;overflow:hidden;margin-top:12px">
+            <div class="calendly-inline-widget" data-url="https://calendly.com/YOUR_CALENDLY_LINK" style="min-width:260px;height:500px;"></div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <h4 style="margin:0 0 6px 0">Contact</h4>
+          <p class="small muted-2">Quick contact info</p>
+          <p class="small"><strong>Email:</strong> <a href="mailto:you@example.com" style="color:var(--teal)">you@example.com</a></p>
+          <p class="small">Phone / Other info</p>
+        </div>
+      </aside>
+    </div>
+
+    <section id="about" class="wrap">
+      <h2>About</h2>
+      <p class="muted">ForexED delivers education-only Forex training — no investment, no profit-sharing, no financial advice. All materials are for educational purposes only. Replace this copy with your organization details and compliance disclaimers as needed.</p>
+    </section>
+
+    <section id="services" class="wrap">
+      <h2>Services</h2>
+      <div style="display:grid;gap:10px;">
+        <div class="card">
+          <h3 style="margin:0">Beginner Courses</h3>
+          <p class="muted">Foundations: currency pairs, pips, spreads, execution basics.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0">Advanced Webinars</h3>
+          <p class="muted">Strategy, risk-management (educational), and live chart analysis.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="webinars" class="wrap">
+      <h2>Webinars</h2>
+      <p class="muted">Upcoming webinars and recordings. Use the Book a Session panel above to schedule time via Calendly.</p>
+
+      <div style="display:grid;gap:10px;margin-top:12px">
+        <div class="card">
+          <h3 style="margin:0">Intro to Forex — Weekly</h3>
+          <p class="muted">A rotating schedule of introductory sessions. Book via the booking widget.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0">Technical Analysis — Monthly</h3>
+          <p class="muted">Deep dives into chart patterns and indicators (educational only).</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="wrap">
+      <h2>Contact</h2>
+      <p class="muted">Use the form below or email us directly. Form uses Formspree (replace YOUR_FORM_ID).</p>
+
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" role="form" style="max-width:700px">
+        <input type="text" name="name" placeholder="Full name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <textarea name="message" rows="6" placeholder="Message" required></textarea>
+        <div style="display:flex;gap:10px;align-items:center;margin-top:6px">
+          <button class="btn btn-primary" type="submit">Send message</button>
+          <div class="small muted">We don't offer investment advice. This is education-only contact.</div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div>
+        <strong style="color:var(--teal)">ForexED</strong>
+        <div class="small muted">Modern Forex trading education — no investment, no advice.</div>
+      </div>
+      <div style="text-align:right">
+        <div class="small muted">Contact: <a href="mailto:you@example.com" style="color:var(--teal)">you@example.com</a></div>
+        <div class="small muted">© <span id="year"></span> ForexED</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // mobile nav toggle
+    (function(){
+      const btn = document.getElementById('mobileBtn');
+      const menu = document.getElementById('mobileMenu');
+      if(!btn) return;
+      btn.addEventListener('click', ()=>{
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        menu.classList.toggle('show');
+        menu.setAttribute('aria-hidden', String(expanded));
+      });
+    })();
+
+    // Calendly widget loader
+    (function(){
+      const src = 'https://assets.calendly.com/assets/external/widget.js';
+      if(!document.querySelector('script[src="'+src+'"]')){
+        const s = document.createElement('script');
+        s.src = src;
+        s.async = true;
+        document.body.appendChild(s);
+      }
+    })();
+
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- Tawk.to integration (optional)
+       1) Sign up at https://tawk.to and get your widget ID
+       2) Replace YOUR_TAWK_ID below with your ID and uncomment the script block
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/YOUR_TAWK_ID/default';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  -->
+
+</body>
+</html>
