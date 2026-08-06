@@ -18,17 +18,13 @@
           <small>Forex • Crypto • Trading Education</small>
         </div>
       </div>
-
       <nav class="nav" aria-label="Main navigation">
-        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open menu">☰</button>
-        <ul id="primary-navigation" class="nav-list" role="menubar">
-          <li role="none"><a role="menuitem" href="index.html">Home</a></li>
-          <li role="none"><a role="menuitem" href="articles/foundations.html">Beginner</a></li>
-          <li role="none"><a role="menuitem" href="webinars/intro-to-forex.html">Webinars</a></li>
-          <li role="none"><a role="menuitem" href="articles/technical-indicators.html">Advanced</a></li>
-          <li role="none"><a role="menuitem" href="about.html">About</a></li>
-          <li role="none"><a class="cta" role="menuitem" href="#book">Book a Session</a></li>
-        </ul>
+        <a href="index.html">Home</a>
+        <a href="articles/foundations.html">Beginner</a>
+        <a href="webinars/intro-to-forex.html">Webinars</a>
+        <a href="articles/technical-indicators.html">Advanced</a>
+        <a href="about.html">About</a>
+        <a class="cta" href="#book">Book a Session</a>
       </nav>
     </div>
   </header>
@@ -45,7 +41,7 @@
           </div>
         </div>
         <div class="hero-media" aria-hidden="true">
-          <!-- promo illustration -->
+          <!-- sample promo image / illustration (SVG) -->
           <svg width="360" height="240" viewBox="0 0 360 240" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="360" height="240" rx="18" fill="#fff" opacity="0.06"/>
             <g opacity="0.9" transform="translate(20,20)">
@@ -57,7 +53,6 @@
       </div>
     </section>
 
-    <!-- Services (polished copy) -->
     <section id="services" class="container cards brightly">
       <h2>Services — Practical training and mentoring</h2>
       <div class="card-grid">
@@ -181,21 +176,151 @@
   <footer class="site-footer">
     <div class="container">
       <p>&copy; <span id="year"></span> TradeLearn — All rights reserved.</p>
-      <p class="small">Educational only — TradeLearn does not provide financial, tax or investment advice. Trading is high-risk and you may lose part or all of your capital. See our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</p>
     </div>
   </footer>
 
-  <!-- Tawk.to placeholder (configure your property id) -->
+  <!-- Inline chat opt-in and pre-chat form (Tawk.to) -->
+  <div id="chat-optin" style="position:fixed;right:18px;bottom:18px;z-index:10030">
+    <button id="open-chat" aria-haspopup="dialog" aria-controls="prechat-modal" style="background:linear-gradient(90deg,var(--accent-2),var(--accent));border:0;padding:0.6rem 0.9rem;border-radius:999px;color:#022;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(92,165,170,0.18)">Chat with us</button>
+  </div>
+
+  <div id="prechat-modal" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;position:fixed;inset:0;z-index:10040;align-items:center;justify-content:center;background:rgba(2,6,23,0.6)">
+    <div style="background:#fff;color:#022;width:min(480px,96%);border-radius:12px;padding:1rem;box-shadow:0 20px 60px rgba(2,6,23,0.4);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;"><strong>Start a chat</strong><button id="prechat-close" style="background:transparent;border:0;font-size:1.2rem;cursor:pointer">✕</button></div>
+      <p style="margin:0 0 0.5rem;color:#334">Please tell us a little about your question — this helps us connect you with the right trainer.</p>
+      <form id="prechat-form">
+        <label style="display:block;margin-top:0.5rem"><small style="color:#666">Your name</small><input name="name" required style="width:100%;padding:0.6rem;margin-top:6px;border-radius:8px;border:1px solid #e6eef0" /></label>
+        <label style="display:block;margin-top:0.5rem"><small style="color:#666">Email</small><input name="email" type="email" required style="width:100%;padding:0.6rem;margin-top:6px;border-radius:8px;border:1px solid #e6eef0" /></label>
+        <label style="display:block;margin-top:0.5rem"><small style="color:#666">Topic</small>
+          <select name="topic" style="width:100%;padding:0.6rem;margin-top:6px;border-radius:8px;border:1px solid #e6eef0">
+            <option>Beginner course / Bootcamp</option>
+            <option>Mentoring & 1:1</option>
+            <option>Webinars & recordings</option>
+            <option>Indicators & tools</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label style="display:block;margin-top:0.5rem"><small style="color:#666">Your message</small><textarea name="message" rows="4" style="width:100%;padding:0.6rem;margin-top:6px;border-radius:8px;border:1px solid #e6eef0"></textarea></label>
+        <div style="display:flex;gap:0.5rem;justify-content:flex-end;margin-top:0.75rem">
+          <button id="prechat-offline" type="button" style="background:transparent;border:1px solid rgba(2,6,23,0.08);padding:0.5rem 0.8rem;border-radius:8px;cursor:pointer">Send offline message</button>
+          <button id="prechat-submit" type="submit" style="background:linear-gradient(90deg,var(--accent-2),var(--accent));border:0;padding:0.55rem 0.85rem;border-radius:8px;color:#022;font-weight:700;cursor:pointer">Start Chat</button>
+        </div>
+        <p id="prechat-note" style="margin-top:0.5rem;color:#666;font-size:0.9rem"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="/assets/script.js"></script>
+
   <script>
   (function(){
-    var TAWK_PROPERTY_ID = 'TAWK_PROPERTY_ID';
-    if (TAWK_PROPERTY_ID && TAWK_PROPERTY_ID !== 'TAWK_PROPERTY_ID') {
-      var s1=document.createElement('script'),s0=document.getElementsByTagName('script')[0];
-      s1.async=true; s1.src='https://embed.tawk.to/' + TAWK_PROPERTY_ID + '/default'; s1.charset='UTF-8'; s1.setAttribute('crossorigin','*'); s0.parentNode.insertBefore(s1,s0);
+    const TAWK_ID = '6a7494ffb4956a1d487d0660';
+    const ownerEmail = 'gshoury68@gmail.com';
+    // Business hours: Mon-Fri 09:00-17:00 Europe/Berlin
+    function inBusinessHours(){
+      try{
+        const now = new Date();
+        const parts = new Intl.DateTimeFormat('en-GB',{weekday:'short',hour:'numeric',hour12:false,timeZone:'Europe/Berlin'}).formatToParts(now);
+        const weekday = parts.find(p=>p.type==='weekday').value;
+        const hour = parseInt(parts.find(p=>p.type==='hour').value,10);
+        const open = ['Mon','Tue','Wed','Thu','Fri'].includes(weekday) && hour>=9 && hour<17;
+        return open;
+      }catch(e){ return true; }
     }
+
+    function loadTawkAndOpen(attrs){
+      if(window.__tawk_loaded) return openTawkWidget(attrs);
+      window.__tawk_loaded = true;
+      var s1=document.createElement('script'),s0=document.getElementsByTagName('script')[0];
+      s1.async=true; s1.src='https://embed.tawk.to/' + TAWK_ID + '/default'; s1.charset='UTF-8'; s1.setAttribute('crossorigin','*');
+      s1.onload = function(){ openTawkWidget(attrs); };
+      s0.parentNode.insertBefore(s1,s0);
+    }
+
+    function openTawkWidget(attrs){
+      try{
+        if(typeof Tawk_API === 'undefined'){
+          // wait briefly
+          setTimeout(()=>openTawkWidget(attrs),400);
+          return;
+        }
+        Tawk_API.onLoad = function(){
+          // set visitor attributes for agent context
+          if(attrs && typeof Tawk_API.setAttributes === 'function'){
+            Tawk_API.setAttributes({name:attrs.name || undefined, email:attrs.email || undefined, 'topic': attrs.topic || undefined}, function(err){ /* no-op */ });
+          }
+          // open chat window
+          if(typeof Tawk_API.maximize === 'function') Tawk_API.maximize();
+        };
+      }catch(e){console.warn('tawk open error',e)}
+    }
+
+    // UI wiring
+    const openBtn = document.getElementById('open-chat');
+    const modal = document.getElementById('prechat-modal');
+    const closeBtn = document.getElementById('prechat-close');
+    const form = document.getElementById('prechat-form');
+    const offlineBtn = document.getElementById('prechat-offline');
+    const note = document.getElementById('prechat-note');
+
+    function showModal(){ modal.style.display='flex'; modal.setAttribute('aria-hidden','false'); }
+    function hideModal(){ modal.style.display='none'; modal.setAttribute('aria-hidden','true'); }
+
+    openBtn.addEventListener('click', function(){
+      // lightweight opt-in: ensure cookie consent
+      const consent = localStorage.getItem('tradelearn_cookie_consent');
+      if(consent !== 'accepted'){
+        note.textContent = 'Please accept cookies to start a live chat. You can accept in the cookie banner.';
+      } else {
+        note.textContent = inBusinessHours() ? 'We are online — connect with a trainer now.' : 'We are currently offline. Use "Send offline message" and we will respond by email.';
+      }
+      showModal();
+    });
+    closeBtn.addEventListener('click', hideModal);
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const data = new FormData(form);
+      const attrs = { name: data.get('name'), email: data.get('email'), topic: data.get('topic'), message: data.get('message') };
+      const consent = localStorage.getItem('tradelearn_cookie_consent');
+      if(consent !== 'accepted'){
+        note.textContent = 'Please accept cookies to continue.'; return;
+      }
+      if(inBusinessHours()){
+        // load tawk and open
+        loadTawkAndOpen(attrs);
+        hideModal();
+      } else {
+        // outside hours: offer to send offline message via mailto to owner
+        const subject = encodeURIComponent('Offline chat request: ' + attrs.topic);
+        const body = encodeURIComponent('Name: ' + attrs.name + '\nEmail: ' + attrs.email + '\n\nMessage:\n' + attrs.message);
+        window.location.href = 'mailto:' + encodeURIComponent(ownerEmail) + '?subject=' + subject + '&body=' + body;
+        hideModal();
+        alert('Your message will open in your email client. We will respond to you by email as soon as possible.');
+      }
+    });
+
+    offlineBtn.addEventListener('click', function(){
+      const data = new FormData(form);
+      const attrs = { name: data.get('name'), email: data.get('email'), topic: data.get('topic'), message: data.get('message') };
+      const subject = encodeURIComponent('Offline message: ' + attrs.topic);
+      const body = encodeURIComponent('Name: ' + attrs.name + '\nEmail: ' + attrs.email + '\n\nMessage:\n' + attrs.message);
+      window.location.href = 'mailto:' + encodeURIComponent(ownerEmail) + '?subject=' + subject + '&body=' + body;
+      hideModal();
+    });
+
+    // If cookie consent already accepted and within hours, preload script quietly (optional)
+    try{
+      const consent = localStorage.getItem('tradelearn_cookie_consent');
+      if(consent === 'accepted' && inBusinessHours()){
+        // do not open widget, just preload
+        var s = document.createElement('script'); s.async=true; s.src='https://embed.tawk.to/' + TAWK_ID + '/default'; s.charset='UTF-8'; s.setAttribute('crossorigin','*'); document.getElementsByTagName('head')[0].appendChild(s);
+        window.__tawk_loaded = true;
+      }
+    }catch(e){/* ignore */}
+
   })();
   </script>
 
-  <script src="/assets/script.js"></script>
 </body>
 </html>
