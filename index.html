@@ -18,13 +18,17 @@
           <small>Forex • Crypto • Trading Education</small>
         </div>
       </div>
+
       <nav class="nav" aria-label="Main navigation">
-        <a href="/">Home</a>
-        <a href="/articles/foundations.html">Beginner</a>
-        <a href="/webinars/intro-to-forex.html">Webinars</a>
-        <a href="/articles/technical-indicators.html">Advanced</a>
-        <a href="/about.html">About</a>
-        <a class="cta" href="#book">Book a Session</a>
+        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open menu">☰</button>
+        <ul id="primary-navigation" class="nav-list" role="menubar">
+          <li role="none"><a role="menuitem" href="index.html">Home</a></li>
+          <li role="none"><a role="menuitem" href="articles/foundations.html">Beginner</a></li>
+          <li role="none"><a role="menuitem" href="webinars/intro-to-forex.html">Webinars</a></li>
+          <li role="none"><a role="menuitem" href="articles/technical-indicators.html">Advanced</a></li>
+          <li role="none"><a role="menuitem" href="about.html">About</a></li>
+          <li role="none"><a class="cta" role="menuitem" href="#book">Book a Session</a></li>
+        </ul>
       </nav>
     </div>
   </header>
@@ -36,12 +40,12 @@
           <h2>Learn to trade with confidence — practical courses & live mentoring</h2>
           <p class="lead">Actionable lessons, real-market demonstrations and live webinars. Built for beginners and professionals who want repeatable results.</p>
           <div style="margin-top:1.25rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
-            <a class="primary" href="/articles/foundations.html">Start Learning — Beginner Course</a>
+            <a class="primary" href="articles/foundations.html">Start Learning — Beginner Course</a>
             <a class="secondary" href="#webinars">See Webinars</a>
           </div>
         </div>
         <div class="hero-media" aria-hidden="true">
-          <!-- sample promo image / illustration (SVG) -->
+          <!-- promo illustration -->
           <svg width="360" height="240" viewBox="0 0 360 240" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="360" height="240" rx="18" fill="#fff" opacity="0.06"/>
             <g opacity="0.9" transform="translate(20,20)">
@@ -53,32 +57,44 @@
       </div>
     </section>
 
+    <!-- Services (polished copy) -->
     <section id="services" class="container cards brightly">
-      <h2>Services — What we offer</h2>
+      <h2>Services — Practical training and mentoring</h2>
       <div class="card-grid">
         <article class="card feature">
-          <h3>Beginner Courses</h3>
-          <p>Foundations: currency pairs, pips, spreads, execution basics. Short lessons, videos and hands-on exercises to get started.</p>
-          <a class="btn" href="/articles/foundations.html">Explore</a>
+          <h3>Beginner Bootcamp</h3>
+          <p>4-week structured course covering market basics, chart reading, simple strategies, and the exact routines you need to place your first trades with confidence.</p>
+          <ul>
+            <li>Step-by-step video lessons</li>
+            <li>Live weekly Q&A</li>
+            <li>Practice workbook & entry/exit checklist</li>
+          </ul>
+          <a class="btn" href="articles/foundations.html">Start the Bootcamp</a>
         </article>
 
         <article class="card feature">
-          <h3>Advanced Webinars</h3>
-          <p>Strategy design, risk management frameworks, live chart analysis and trade reviews. Educational, non-signaling material designed to teach you how to think like a professional trader.</p>
-          <a class="btn" href="/articles/technical-indicators.html">Learn more</a>
+          <h3>Strategy Lab — Intermediate</h3>
+          <p>Build reproducible strategies: backtesting, risk frameworks, position sizing, and trade journals. Practical workshops with live chart sessions.</p>
+          <a class="btn" href="articles/technical-indicators.html">See Curriculum</a>
         </article>
 
         <article class="card feature">
           <h3>1:1 Mentoring & Group Seminars</h3>
-          <p>Book personalized mentoring or join group sessions. Practical feedback, live model trades, and disciplined routines.</p>
-          <a class="btn" href="#book">Book</a>
+          <p>Personalized coaching for traders who want to accelerate progress. Mentoring focuses on process, psychology, and scaling risk responsibly.</p>
+          <a class="btn" href="#book">Book Mentoring</a>
+        </article>
+
+        <article class="card feature">
+          <h3>Tools & Indicator Education</h3>
+          <p>Hands-on lessons about technical indicators, how to combine them, and how to avoid overfitting. We provide indicators as learning tools — not trade signals.</p>
+          <a class="btn" href="articles/technical-indicators.html">Learn Indicators</a>
         </article>
       </div>
 
       <div class="sell-box">
-        <h3>Ready to commit?</h3>
-        <p>Our training is structured for measurable improvement: clear lessons, live demos, and ongoing Q&A. Packages start with a free intro webinar — convert learners into paying students with confidence.</p>
-        <a class="primary" href="#book">Book Intro Webinar (Free)</a>
+        <h3>Designed for EU & Global learners</h3>
+        <p>All materials are language-neutral and accessible worldwide. Payment and booking respect GDPR and international payment norms — invoices and VAT options available where required.</p>
+        <a class="primary" href="#book">Book a free intro webinar</a>
       </div>
     </section>
 
@@ -91,7 +107,7 @@
           <h3>Intro to Forex — Weekly</h3>
           <p class="meta">A rotating schedule of introductory sessions. Perfect for new traders.</p>
           <div style="margin-top:.75rem;display:flex;gap:.5rem;">
-            <a class="btn" href="/webinars/intro-to-forex.html">Details</a>
+            <a class="btn" href="webinars/intro-to-forex.html">Details</a>
             <a id="book-intro" class="secondary" href="#book">Book</a>
           </div>
         </article>
@@ -100,7 +116,7 @@
           <h3>Technical Analysis — Monthly</h3>
           <p class="meta">Deep dives into chart patterns and indicators — educational only.</p>
           <div style="margin-top:.75rem;display:flex;gap:.5rem;">
-            <a class="btn" href="/articles/technical-indicators.html">Curriculum</a>
+            <a class="btn" href="articles/technical-indicators.html">Curriculum</a>
             <a id="book-tech" class="secondary" href="#book">Book</a>
           </div>
         </article>
@@ -111,7 +127,7 @@
         <article class="item-card">
           <h4>Support & Resistance — Sample Recording</h4>
           <p class="meta">Short demo: identifying strong levels and planning entries.</p>
-          <div style="margin-top:.75rem;"><button class="btn" onclick="openVideo('dQw4w9WgXcQ')">Play</button></div>
+          <div style="margin-top:.75rem;"><button class="btn" data-video="dQw4w9WgXcQ">Play</button></div>
         </article>
       </div>
     </section>
@@ -131,8 +147,9 @@
           </div>
         </div>
         <div class="booking-right">
-          <div id="calendly-inline" style="min-width:320px;height:520px;background:#fff;border-radius:12px;padding:12px;box-shadow:0 6px 20px rgba(11,19,32,0.04);">
-            <p style="color:var(--muted)">Loading booking widget…</p>
+          <div id="calendly-inline" class="calendly-card">
+            <div class="calendly-loading">Loading booking widget…</div>
+            <!-- If you have a Calendly link configured in assets/script.js it will load inline here -->
           </div>
         </div>
       </div>
@@ -164,10 +181,11 @@
   <footer class="site-footer">
     <div class="container">
       <p>&copy; <span id="year"></span> TradeLearn — All rights reserved.</p>
+      <p class="small">Educational only — TradeLearn does not provide financial, tax or investment advice. Trading is high-risk and you may lose part or all of your capital. See our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</p>
     </div>
   </footer>
 
-  <!-- Tawk.to placeholder -->
+  <!-- Tawk.to placeholder (configure your property id) -->
   <script>
   (function(){
     var TAWK_PROPERTY_ID = 'TAWK_PROPERTY_ID';
@@ -178,50 +196,6 @@
   })();
   </script>
 
-  <script>
-  // Interactive behaviors: year, booking, video modal
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // set your Calendly event page (event must exist in your Calendly account)
-  const CALENDLY = { url: 'https://calendly.com/gshoury68/30min' };
-
-  (function initBooking(){
-    const quick = document.getElementById('calendly-quick-link');
-    const inlineHolder = document.getElementById('calendly-inline');
-    if(CALENDLY.url && CALENDLY.url.indexOf('YOUR_CALENDLY_USERNAME') === -1){
-      quick.href = CALENDLY.url; quick.textContent = 'Open booking page';
-      inlineHolder.innerHTML = `<div class="calendly-inline-widget" data-url="${CALENDLY.url}" style="min-width:320px;height:520px;"></div>`;
-      if(!document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]')){
-        const s = document.createElement('script'); s.src='https://assets.calendly.com/assets/external/widget.js'; s.async=true; document.body.appendChild(s);
-      }
-    } else {
-      quick.href = '#'; quick.textContent = 'Booking not configured';
-      inlineHolder.innerHTML = '<p style="color:var(--muted)">Booking link not configured. Edit index.html to add your Calendly URL.</p>';
-    }
-
-    // wire book buttons
-    ['book-intro','book-tech'].forEach(id => {
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.addEventListener('click', (e)=>{ e.preventDefault(); if(CALENDLY.url.indexOf('YOUR_CALENDLY_USERNAME')===-1){ window.open(CALENDLY.url,'_blank','noopener'); } else { alert('Booking not configured.'); } });
-    });
-  })();
-
-  // video modal
-  (function createVideoModal(){
-    const modal = document.createElement('div'); modal.id='video-modal';
-    modal.style='position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(11,19,32,0.6);z-index:9999;';
-    modal.innerHTML = `<div style="background:#fff;width:min(1100px,96%);border-radius:10px;padding:1rem;position:relative;">
-      <div id="modal-close" style="position:absolute;right:12px;top:8px;cursor:pointer;font-weight:700">✕</div>
-      <div id="video-container" style="min-height:300px;"></div>
-    </div>`;
-    document.body.appendChild(modal);
-    modal.addEventListener('click',(e)=>{ if(e.target===modal) closeModal(); });
-    modal.querySelector('#modal-close').addEventListener('click', closeModal);
-    window.openVideo = function(yid){ const container = document.getElementById('video-container'); container.innerHTML = `<div style="position:relative;padding-top:56.25%"><iframe src="https://www.youtube.com/embed/${yid}?autoplay=1" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>`; modal.style.display='flex'; };
-    function closeModal(){ const modal = document.getElementById('video-modal'); modal.style.display='none'; const c=document.getElementById('video-container'); if(c) c.innerHTML=''; }
-    window.closeVideo = closeModal;
-  })();
-  </script>
+  <script src="/assets/script.js"></script>
 </body>
 </html>
