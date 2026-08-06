@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Simulator — TradeLearn Demo Trading</title>
+  <meta name="description" content="Demo trading simulator for training — replay historical market data and practice entries without real money." />
+  <link rel="stylesheet" href="/assets/style.css">
+  <style>
+    /* Minimal simulator-specific styles to integrate with site theme */
+    body {background:linear-gradient(180deg,#08151a 0%,#071018 100%);color:#eaf9f8}
+    .sim-container{max-width:1200px;margin:2rem auto;padding:1rem}
+    .sim-top{display:flex;gap:1rem;align-items:center;justify-content:space-between}
+    .badge-demo{background:linear-gradient(90deg,#ff7a59,#ffb86b);color:#042;padding:0.45rem 0.75rem;border-radius:999px;font-weight:700}
+    .chart-card{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.02));border-radius:10px;padding:0.8rem;margin-top:1rem;}
+    .controls{display:flex;gap:0.6rem;align-items:center}
+    .panel{background:rgba(255,255,255,0.03);padding:0.8rem;border-radius:10px}
+    .trade-panel{width:320px}
+    .stat{display:flex;justify-content:space-between;margin-bottom:0.35rem}
+    .small-muted{color:#9fb9b8;font-size:0.9rem}
+    .disclaimer{background:rgba(255,90,90,0.08);color:#ffdfe0;padding:0.6rem;border-radius:8px;margin-top:0.75rem}
+    .indicator-toggle{display:flex;flex-wrap:wrap;gap:0.4rem}
+    .btn-mini{padding:0.4rem 0.6rem;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+  </style>
+  <!-- Lightweight Charts from TradingView (unpkg) -->
+  <script src="https://unpkg.com/lightweight-charts@4.0.0/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+  <div class="sim-container">
+    <div class="sim-top">
+      <div>
+        <h1 style="margin:0">Simulator — Demo Trading</h1>
+        <div class="small-muted">Practice with historical data in a controlled, educational demo environment</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem">
+        <div class="badge-demo">DEMO ONLY</div>
+        <div class="small-muted">Starting balance: <strong id="start-balance-text">$10,000</strong></div>
+      </div>
+    </div>
+
+    <div class="disclaimer"><strong>Educational only.</strong> This simulator uses historical market data for replay and practice. No real money is used. TradeLearn does not provide financial advice.</div>
+
+    <div style="display:flex;gap:1rem;margin-top:1rem;align-items:flex-start">
+      <div style="flex:1">
+        <div class="chart-card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <select id="instrument-select" style="padding:0.5rem;border-radius:8px;background:transparent;color:inherit;border:1px solid rgba(255,255,255,0.04)">
+                <option value="EURUSD">EUR / USD</option>
+                <option value="GBPUSD">GBP / USD</option>
+                <option value="USDJPY">USD / JPY</option>
+                <option value="BTCUSD">BTC / USD</option>
+              </select>
+            </div>
+            <div class="controls">
+              <button id="play" class="btn-mini">Play</button>
+              <button id="pause" class="btn-mini">Pause</button>
+              <button id="step" class="btn-mini">Step</button>
+              <label class="small-muted" style="margin-left:0.5rem">Speed:</label>
+              <select id="speed" style="padding:0.35rem;border-radius:6px;background:transparent;color:inherit;border:1px solid rgba(255,255,255,0.03)">
+                <option value="1">1x</option>
+                <option value="2">2x</option>
+                <option value="4">4x</option>
+                <option value="8">8x</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="chart" style="height:420px;margin-top:0.6rem"></div>
+
+          <div style="display:flex;justify-content:space-between;margin-top:0.6rem;align-items:center">
+            <div class="indicator-toggle">
+              <label class="small-muted" style="margin-right:0.4rem">Indicators:</label>
+              <button data-ind="sma" class="btn-mini">SMA</button>
+              <button data-ind="ema" class="btn-mini">EMA</button>
+              <button data-ind="rsi" class="btn-mini">RSI</button>
+              <button data-ind="macd" class="btn-mini">MACD</button>
+              <button data-ind="bb" class="btn-mini">Bollinger</button>
+            </div>
+
+            <div class="small-muted">Scenario: <select id="scenario-select" style="padding:0.3rem;border-radius:6px;background:transparent;color:inherit;border:1px solid rgba(255,255,255,0.03)">
+              <option value="trending">Trending</option>
+              <option value="volatile">Volatile</option>
+              <option value="range">Range-bound</option>
+            </select></div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:1rem;margin-top:0.8rem">
+          <button id="export-journal" class="btn">Export journal (CSV)</button>
+          <button id="reset-sim" class="btn" style="background:transparent;border:1px solid rgba(255,255,255,0.05)">Reset Simulator</button>
+        </div>
+
+      </div>
+
+      <div class="trade-panel panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem"><strong>Trade Panel</strong><small class="small-muted" id="time-display">00:00</small></div>
+        <div class="stat"><span>Balance</span><span id="balance">$10,000.00</span></div>
+        <div class="stat"><span>Unreal. P&L</span><span id="unreal">$0.00</span></div>
+        <div class="stat"><span>Realized P&L</span><span id="realized">$0.00</span></div>
+        <div style="height:1px;background:rgba(255,255,255,0.03);margin:0.6rem 0"></div>
+
+        <div style="margin-bottom:0.5rem"><label class="small-muted">Order type</label><select id="order-type" style="width:100%;padding:0.5rem;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.03)"><option value="market">Market</option><option value="limit">Limit</option></select></div>
+        <div style="margin-bottom:0.5rem"><label class="small-muted">Price (for Limit)</label><input id="order-price" placeholder="Market" style="width:100%;padding:0.5rem;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.03)" /></div>
+        <div style="margin-bottom:0.5rem"><label class="small-muted">Volume (units)</label><input id="order-size" value="1000" style="width:100%;padding:0.5rem;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.03)" /></div>
+        <div style="display:flex;gap:0.4rem"><button id="buy" class="btn">Buy</button><button id="sell" class="btn" style="background:transparent;border:1px solid rgba(255,255,255,0.05)">Sell</button></div>
+
+        <div style="height:1px;background:rgba(255,255,255,0.03);margin:0.6rem 0"></div>
+        <div><strong>Open Positions</strong></div>
+        <div id="positions" style="margin-top:0.5rem;min-height:60px"></div>
+        <div style="height:1px;background:rgba(255,255,255,0.03);margin:0.6rem 0"></div>
+        <div><strong>Order History</strong></div>
+        <div id="history" style="max-height:180px;overflow:auto;margin-top:0.5rem;font-size:0.9rem"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+  // Minimal simulator logic (MVP) — uses sample CSV data embedded for demo
+  (function(){
+    // Default config
+    const START_BALANCE = 10000;
+    const COMMISSION = 1; // $1 per trade
+    const SLIPPAGE_PCT = 0.0005; // 0.05%
+
+    // UI elements
+    const instrumentSelect = document.getElementById('instrument-select');
+    const playBtn = document.getElementById('play');
+    const pauseBtn = document.getElementById('pause');
+    const stepBtn = document.getElementById('step');
+    const speedSelect = document.getElementById('speed');
+    const chartDiv = document.getElementById('chart');
+    const balanceEl = document.getElementById('balance');
+    const unrealEl = document.getElementById('unreal');
+    const realizedEl = document.getElementById('realized');
+    const positionsEl = document.getElementById('positions');
+    const historyEl = document.getElementById('history');
+    const timeDisplay = document.getElementById('time-display');
+    const orderType = document.getElementById('order-type');
+    const orderPrice = document.getElementById('order-price');
+    const orderSize = document.getElementById('order-size');
+    const buyBtn = document.getElementById('buy');
+    const sellBtn = document.getElementById('sell');
+    const exportBtn = document.getElementById('export-journal');
+    const resetBtn = document.getElementById('reset-sim');
+
+    // Simple in-memory state persisted to localStorage
+    const STATE_KEY = 'tradelearn_sim_state_v1';
+    let state = { balance: START_BALANCE, realized:0, positions:[], history:[] };
+
+    function saveState(){ localStorage.setItem(STATE_KEY,JSON.stringify(state)); }
+    function loadState(){ const s = localStorage.getItem(STATE_KEY); if(s) state = JSON.parse(s); }
+
+    loadState(); // load saved state if any
+    // init UI
+    function updateUI(){ balanceEl.textContent = '$' + state.balance.toFixed(2); unrealEl.textContent = '$' + (state.positions.reduce((s,p)=>s + (p.size*(latestPrice - p.entryPrice)),0)||0).toFixed(2); realizedEl.textContent = '$' + state.realized.toFixed(2);
+      // positions
+      positionsEl.innerHTML=''; state.positions.forEach((p,idx)=>{ const el=document.createElement('div'); el.textContent = p.side.toUpperCase() + ' ' + p.size + ' @ ' + p.entryPrice.toFixed(5) + ' (id:'+idx+')'; positionsEl.appendChild(el); });
+      // history
+      historyEl.innerHTML = state.history.slice().reverse().map(h=>`<div>${h.time} ${h.side} ${h.size} @ ${h.price.toFixed(5)} (${h.type})</div>`).join('');
+      saveState(); }
+
+    // sample historical data (minute candles) — in a real build these are CSV fetches
+    // We'll include short arrays for demo; full datasets will be added in later commits
+    const SAMPLE = {
+      'EURUSD': [
+        // time, open, high, low, close
+        ['2020-01-02T00:00:00Z',1.1200,1.1210,1.1190,1.1205],
+        ['2020-01-02T00:01:00Z',1.1205,1.1215,1.1200,1.1210],
+        ['2020-01-02T00:02:00Z',1.1210,1.1220,1.1208,1.1218],
+        ['2020-01-02T00:03:00Z',1.1218,1.1225,1.1210,1.1212],
+        ['2020-01-02T00:04:00Z',1.1212,1.1230,1.1210,1.1225],
+        ['2020-01-02T00:05:00Z',1.1225,1.1235,1.1220,1.1230]
+      ],
+      'GBPUSD': [['2020-01-02T00:00:00Z',1.3000,1.3015,1.2990,1.3008],['2020-01-02T00:01:00Z',1.3008,1.3020,1.3005,1.3015]],
+      'USDJPY': [['2020-01-02T00:00:00Z',110.10,110.20,110.00,110.15],['2020-01-02T00:01:00Z',110.15,110.25,110.10,110.20]],
+      'BTCUSD': [['2020-01-02T00:00:00Z',7000,7020,6980,7010],['2020-01-02T00:01:00Z',7010,7050,7000,7040]]
+    };
+
+    // chart setup
+    const chart = LightweightCharts.createChart(chartDiv,{ layout:{background:'#071018',textColor:'#dff7f6'}, grid:{vertLines:{color:'rgba(255,255,255,0.03)'},horzLines:{color:'rgba(255,255,255,0.03)'}},crosshair:{mode:0}});
+    const candleSeries = chart.addCandlestickSeries({ upColor:'#3aa7a6', downColor:'#ff7a59', borderVisible:false, wickColor:'#fff' });
+
+    let latestPrice = 0; let currentIndex = 0; let playing=false; let timer=null;
+
+    function loadInstrument(instr){ const raw = SAMPLE[instr] || SAMPLE['EURUSD']; const data = raw.map(r=>({time:r[0],open:r[1],high:r[2],low:r[3],close:r[4]})); candleSeries.setData(data); allData = data; currentIndex = 0; latestPrice = data[0].close; updateTime(); updateUI(); }
+    let allData = [];
+
+    function updateTime(){ if(allData[currentIndex]) timeDisplay.textContent = allData[currentIndex].time; }
+
+    function stepForward(){ if(currentIndex < allData.length-1) currentIndex++; const point = allData[currentIndex]; candleSeries.update(point); latestPrice = point.close; updateTime(); updateUI(); checkLimitOrders(); }
+
+    function play(){ if(playing) return; playing=true; const speed = parseInt(speedSelect.value,10) || 1; timer = setInterval(()=>{ stepForward(); }, 1000/ speed); }
+    function pause(){ playing=false; if(timer) {clearInterval(timer); timer=null;} }
+
+    playBtn.addEventListener('click', play); pauseBtn.addEventListener('click', pause); stepBtn.addEventListener('click', stepForward);
+    instrumentSelect.addEventListener('change', ()=> loadInstrument(instrumentSelect.value));
+
+    // Orders
+    function placeOrder(side){ const type = orderType.value; const size = parseFloat(orderSize.value) || 1000; const time = new Date().toISOString(); if(type==='market'){ const execPrice = latestPrice * (1 + (side==='buy' ? SLIPPAGE_PCT : -SLIPPAGE_PCT)); const cost = size * execPrice/ (instrumentSelect.value==='USDJPY'?1:1); // naive
+        state.history.push({time,side,price:execPrice,size,type:'market'}); state.realized -= COMMISSION; // commission
+        // create position
+        const pos = {side,size,entryPrice:execPrice}; state.positions.push(pos); updateUI(); }
+      else { // limit
+        const p = parseFloat(orderPrice.value); if(isNaN(p)){ alert('Enter limit price'); return; }
+        // store pending limit
+        if(!state.pending) state.pending=[]; state.pending.push({time,side,price:p,size,type:'limit'}); state.history.push({time,side,price:p,size,type:'limit-placed'}); updateUI(); }
+    }
+    buyBtn.addEventListener('click', ()=>placeOrder('buy')); sellBtn.addEventListener('click', ()=>placeOrder('sell'));
+
+    function checkLimitOrders(){ if(!state.pending) return; const filled=[]; state.pending.forEach((o,idx)=>{ const p = allData[currentIndex]; if(o.side==='buy'){ if(p.low <= o.price){ // filled
+            const exec = o.price*(1+SLIPPAGE_PCT); state.positions.push({side:'buy',size:o.size,entryPrice:exec}); state.history.push({time:new Date().toISOString(),side:'buy',price:exec,size:o.size,type:'limit-filled'}); state.realized -= COMMISSION; filled.push(idx); }
+        } else { if(p.high >= o.price){ const exec = o.price*(1-SLIPPAGE_PCT); state.positions.push({side:'sell',size:o.size,entryPrice:exec}); state.history.push({time:new Date().toISOString(),side:'sell',price:exec,size:o.size,type:'limit-filled'}); state.realized -= COMMISSION; filled.push(idx); } } });
+      // remove filled in reverse
+      for(let i=filled.length-1;i>=0;i--){ state.pending.splice(filled[i],1); }
+      updateUI(); }
+
+    exportBtn.addEventListener('click', function(){ const rows = [['time','side','price','size','type']].concat(state.history.map(h=>[h.time,h.side,h.price,h.size,h.type])); const csv = rows.map(r=>r.join(',')).join('\n'); const blob = new Blob([csv],{type:'text/csv'}); const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='journal.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); });
+
+    resetBtn.addEventListener('click', function(){ if(!confirm('Reset simulator and clear local data?')) return; state = { balance: START_BALANCE, realized:0, positions:[], history:[] }; saveState(); loadInstrument(instrumentSelect.value); updateUI(); });
+
+    // init
+    loadInstrument(instrumentSelect.value); updateUI();
+
+  })();
+  </script>
+</body>
+</html>
