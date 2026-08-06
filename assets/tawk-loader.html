@@ -1,0 +1,25 @@
+<!-- Tawk.to script (loads after cookie consent) -->
+<script>
+(function(){
+  // Add Tawk loader that waits for cookie consent
+  function loadTawk(){
+    if(window.__tawk_loaded) return; window.__tawk_loaded = true;
+    var TAWK_PROPERTY_ID = '6a7494ffb4956a1d487d0660';
+    var s1=document.createElement('script'),s0=document.getElementsByTagName('script')[0];
+    s1.async=true; s1.src='https://embed.tawk.to/' + TAWK_PROPERTY_ID + '/default'; s1.charset='UTF-8'; s1.setAttribute('crossorigin','*'); s0.parentNode.insertBefore(s1,s0);
+  }
+
+  // If user already accepted cookies, load immediately
+  try{
+    var consent = localStorage.getItem('tradelearn_cookie_consent');
+    if(consent === 'accepted'){
+      loadTawk();
+    } else {
+      // otherwise watch for acceptance
+      document.addEventListener('click', function(e){
+        if(e.target && e.target.id === 'cookie-accept') loadTawk();
+      });
+    }
+  }catch(e){console.warn('tawk init failed',e)}
+})();
+</script>
