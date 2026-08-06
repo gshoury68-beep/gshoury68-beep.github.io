@@ -11,36 +11,78 @@
   <header class="site-header">
     <div class="container header-inner">
       <div class="brand"><img src="/assets/logo.svg" alt="TradeLearn logo" class="logo"><div class="brand-text"><h1>TradeLearn</h1><small>About</small></div></div>
-      <nav class="nav"><a href="/">Home</a></nav>
+      <nav class="nav" aria-label="Main navigation">
+        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open menu">☰</button>
+        <ul id="primary-navigation" class="nav-list" role="menubar">
+          <li role="none"><a role="menuitem" href="index.html">Home</a></li>
+          <li role="none"><a role="menuitem" href="articles/foundations.html">Beginner</a></li>
+          <li role="none"><a role="menuitem" href="webinars/intro-to-forex.html">Webinars</a></li>
+          <li role="none"><a role="menuitem" href="articles/technical-indicators.html">Advanced</a></li>
+          <li role="none"><a role="menuitem" href="about.html">About</a></li>
+          <li role="none"><a class="cta" role="menuitem" href="#book">Book a Session</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
   <main class="container">
-    <h1>About TradeLearn</h1>
-    <p class="meta">We teach trading the practical way — clear frameworks, disciplined risk, and real-market demos.</p>
-
-    <section>
-      <h2>Our mission</h2>
-      <p>To empower traders with practical skills that protect capital and create repeatable advantages in markets. We focus on what works: simple strategies, risk controls, and disciplined execution.</p>
+    <section class="hero-small">
+      <h1>About TradeLearn</h1>
+      <p class="lead">Practical, instructor-led trading education for Forex and Crypto — designed for beginners and professionals who want repeatable skills, not hype.</p>
     </section>
 
-    <section>
-      <h2>Why choose us</h2>
-      <ul>
-        <li>Instructor-led live sessions and recorded lessons</li>
-        <li>Practical strategies, not guesswork</li>
-        <li>Ongoing support via chat and scheduled Q&A</li>
-      </ul>
+    <section id="who-we-are" class="about-grid" style="margin-top:1rem;">
+      <div>
+        <h2>Who we are</h2>
+        <p>TradeLearn is a team of experienced traders, risk managers and educators dedicated to delivering clear, hands-on training that focuses on reproducible processes: reading price action, managing risk, designing strategies and keeping disciplined execution routines.</p>
+
+        <h3>Our mission</h3>
+        <p>To empower traders worldwide with the practical skills needed to protect capital and pursue consistent performance through education, practice and mentorship.</p>
+      </div>
+
+      <div>
+        <h3>What we teach</h3>
+        <ul>
+          <li>Market structure and price-action fundamentals</li>
+          <li>Risk management, position sizing and trade psychology</li>
+          <li>Strategy design, backtesting and journaling</li>
+          <li>How to use indicators as complementary tools — not trading signals</li>
+        </ul>
+
+        <h3>Why choose us</h3>
+        <ul>
+          <li>Practical lessons with live demonstrations and clear routines</li>
+          <li>Beginner tracks and advanced workshops for ongoing development</li>
+          <li>GDPR-aware booking and privacy-respecting analytics</li>
+        </ul>
+      </div>
     </section>
 
-    <section>
-      <h2>Get started</h2>
-      <p>Book a free introductory webinar or explore the beginner course to build a solid foundation.</p>
-      <a class="btn" href="/index.html#book">Book a webinar</a>
+    <section id="team" style="margin-top:1.25rem;">
+      <h2>Our instructors</h2>
+      <p>We work with verified tutors who combine live trading experience and teaching skills. Instructor bios and professional profiles will be added here — if you want to include your team photos and short bios, I can upload them for you.</p>
+    </section>
+
+    <section id="faq" style="margin-top:1.25rem;">
+      <h2>Frequently asked questions</h2>
+      <h4>Do you provide trading signals?</h4>
+      <p>No. All content is strictly educational. We teach methodology, execution and risk management — we do not provide buy/sell signals or personalised financial advice.</p>
+
+      <h4>Is this service GDPR compliant?</h4>
+      <p>We respect EU data protection laws. Bookings are handled via Calendly (a third-party service) and analytics are privacy-first (Plausible) and only enabled after cookie consent.</p>
+
+      <h4>How do I get support?</h4>
+      <p>Use the contact form or the chat widget (when configured) to reach our support team. For data requests, see our Privacy Policy for the contact details and process.</p>
+    </section>
+
+    <section style="margin-top:1.25rem;">
+      <a class="primary" href="index.html#book">Book a free intro webinar</a>
+      <a class="secondary" href="articles/foundations.html" style="margin-left:0.5rem">Start beginner course</a>
     </section>
   </main>
 
-  <footer class="site-footer"><div class="container"><p>&copy; <span id="year"></span> TradeLearn</p></div></footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <footer class="site-footer"><div class="container"><p>&copy; <span id="year"></span> TradeLearn</p><p class="small">Educational only — TradeLearn does not provide financial, tax or investment advice. Trading is high-risk and you may lose part or all of your capital. See our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</p></div></footer>
+
+  <script src="/assets/script.js"></script>
 </body>
 </html>
