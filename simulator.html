@@ -216,7 +216,14 @@
     function calcMACD(data, short=12,long=26,signal=9){ const emaShort = calcEMA(data, short); const emaLong = calcEMA(data, long); const macd = []; for(let i=0;i<data.length;i++){ macd.push(emaShort[i] - emaLong[i]); } // signal line
       const signalLine = calcEMA(macd.map((v,i)=>({close:v})), signal); return {macd, signal:signalLine}; }
 
-    function loadInstrument(instr){ const raw = SAMPLE[instr] || SAMPLE['EURUSD']; const data = raw.map(r=>({time:r[0],open:r[1],high:r[2],low:r[3],close:r[4]})); candleSeries.setData(data); allData = data; currentIndex = 0; latestPrice = data[0].close; updateTime(); computeAndRenderIndicators(); updateUI(); }
+    function loadInstrument(instr){ const raw = SAMPLE[instr] || SAMPLE['EURUSD'];
+      // Convert ISO times to epoch seconds — Lightweight Charts handles numeric time reliably
+      const data = raw.map(r=>({time: Math.floor(new Date(r[0]).getTime()/1000), open:r[1], high:r[2], low:r[3], close:r[4]}));
+      candleSeries.setData(data);
+      allData = data; currentIndex = 0; latestPrice = data[0].close; updateTime(); computeAndRenderIndicators(); updateUI();
+      // ensure chart redraw / fit to data
+      try{ chart.timeScale().fitContent(); }catch(e){ /* ignore if not supported */ }
+    }
 
     function computeAndRenderIndicators(){ if(!allData || allData.length===0) return; const sma = calcSMA(allData,14); const ema = calcEMA(allData,14); const bb = calcBollinger(allData,20,2); const rsi = calcRSI(allData,14); const macdObj = calcMACD(allData);
       // render overlays if series exist
@@ -230,7 +237,7 @@
       macdSeries.setData(macdData);
     }
 
-    function updateTime(){ if(allData[currentIndex]) timeDisplay.textContent = allData[currentIndex].time; }
+    function updateTime(){ if(allData[currentIndex]) timeDisplay.textContent = new Date(allData[currentIndex].time * 1000).toISOString(); }
 
     function stepForward(){ if(currentIndex < allData.length-1) currentIndex++; const point = allData[currentIndex]; candleSeries.update(point); latestPrice = point.close; updateTime(); computeAndRenderIndicators(); updateUI(); checkPendingOrders(); }
 
@@ -246,11 +253,10 @@
       if(ind==='ema'){ if(!emaSeries){ setOverlaySeries(); const edata = calcEMA(allData,14).map((v,i)=> v? {time:allData[i].time, value:v} : null).filter(Boolean); emaSeries.setData(edata); btn.style.opacity=1; } else { chart.removeSeries(emaSeries); emaSeries=null; btn.style.opacity=0.6; } }
       if(ind==='bb'){ if(!bbUpper){ setOverlaySeries(); const bb = calcBollinger(allData,20,2); bbUpper.setData(bb.upper.map((v,i)=> v? {time:allData[i].time,value:v}:null).filter(Boolean)); bbLower.setData(bb.lower.map((v,i)=> v? {time:allData[i].time,value:v}:null).filter(Boolean)); btn.style.opacity=1; } else { chart.removeSeries(bbUpper); chart.removeSeries(bbLower); bbUpper=null; bbLower=null; btn.style.opacity=0.6; } }
       if(ind==='rsi'){ // toggle via indicator chart visibility
-        const visible = rsiSeries.options().visible;
-        // Lightweight-charts doesn't have visible flag; we simulate by setting empty data
-        if(rsiSeries){ if(rsiSeries.getData().length>0){ rsiSeries.setData([]); btn.style.opacity=0.6; } else { rsiSeries.setData(calcRSI(allData,14).map((v,i)=> v? {time:allData[i].time, value:v} : null).filter(Boolean)); btn.style.opacity=1; } }
+        try{ const rsiDataNow = rsiSeries.getData(); if(rsiDataNow && rsiDataNow.length>0){ rsiSeries.setData([]); btn.style.opacity=0.6; } else { rsiSeries.setData(calcRSI(allData,14).map((v,i)=> v? {time:allData[i].time, value:v} : null).filter(Boolean)); btn.style.opacity=1; } }catch(e){ /* ignore */ }
       }
-      if(ind==='macd'){ if(macdSeries.getData().length>0){ macdSeries.setData([]); btn.style.opacity=0.6; } else { macdSeries.setData(calcMACD(allData).macd.map((v,i)=> isFinite(v)? {time:allData[i].time,value:v} : null).filter(Boolean)); btn.style.opacity=1; } }
+      if(ind==='macd'){ try{ const macdNow = macdSeries.getData(); if(macdNow && macdNow.length>0){ macdSeries.setData([]); btn.style.opacity=0.6; } else { macdSeries.setData(calcMACD(allData).macd.map((v,i)=> isFinite(v)? {time:allData[i].time,value:v} : null).filter(Boolean)); btn.style.opacity=1; } }catch(e){ }
+      }
     }); });
 
     // Orders (market, limit, stop, oco)
