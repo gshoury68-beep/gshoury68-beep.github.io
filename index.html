@@ -24,6 +24,7 @@
         <a href="webinars/intro-to-forex.html">Webinars</a>
         <a href="articles/technical-indicators.html">Advanced</a>
         <a href="about.html">About</a>
+        <a href="simulator.html">Simulator</a>
         <a class="cta" href="#book">Book a Session</a>
       </nav>
     </div>
@@ -181,16 +182,16 @@
 
   <!-- Inline chat opt-in and pre-chat form (Tawk.to) -->
   <div id="chat-optin" style="position:fixed;right:18px;bottom:18px;z-index:10030">
-    <button id="open-chat" aria-haspopup="dialog" aria-controls="prechat-modal" style="background:linear-gradient(90deg,var(--accent-2),var(--accent));border:0;padding:0.6rem 0.9rem;border-radius:999px;color:#022;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(92,165,170,0.18)">Chat with us</button>
+    <button id="open-chat" aria-haspopup="dialog" aria-controls="prechat-modal" style="background:linear-gradient(90deg,var(--accent-2),var(--accent));border:0;padding:0.6rem 0.9rem;border-radius[...]
   </div>
 
-  <div id="prechat-modal" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;position:fixed;inset:0;z-index:10040;align-items:center;justify-content:center;background:rgba(2,6,23,0.6)">
+  <div id="prechat-modal" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;position:fixed;inset:0;z-index:10040;align-items:center;justify-content:center;background:rgba(2,6[...]
     <div style="background:#fff;color:#022;width:min(480px,96%);border-radius:12px;padding:1rem;box-shadow:0 20px 60px rgba(2,6,23,0.4);">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;"><strong>Start a chat</strong><button id="prechat-close" style="background:transparent;border:0;font-size:1.2rem;cursor:pointer">✕</button></div>
       <p style="margin:0 0 0.5rem;color:#334">Please tell us a little about your question — this helps us connect you with the right trainer.</p>
       <form id="prechat-form">
-        <label style="display:block;margin-top:0.5rem"><small style="color:#666">Your name</small><input name="name" required style="width:100%;padding:0.6rem;margin-top:6px;border-radius:8px;border:1px solid #e6eef0" /></label>
-        <label style="display:block;margin-top:0.5rem"><small style="color:#666">Email</small><input name="email" type="email" required style="width:100%;padding:0.6rem;margin-top:6px;border-radius:8px;border:1px solid #e6eef0" /></label>
+        <label style="display:block;margin-top:0.5rem"><small style="color:#666">Your name</small><input name="name" required style="width:100%;padding:0.6rem;margin-top:6px;border-radius:8px;bor[...]
+        <label style="display:block;margin-top:0.5rem"><small style="color:#666">Email</small><input name="email" type="email" required style="width:100%;padding:0.6rem;margin-top:6px;border-radi[...]
         <label style="display:block;margin-top:0.5rem"><small style="color:#666">Topic</small>
           <select name="topic" style="width:100%;padding:0.6rem;margin-top:6px;border-radius:8px;border:1px solid #e6eef0">
             <option>Beginner course / Bootcamp</option>
@@ -200,10 +201,10 @@
             <option>Other</option>
           </select>
         </label>
-        <label style="display:block;margin-top:0.5rem"><small style="color:#666">Your message</small><textarea name="message" rows="4" style="width:100%;padding:0.6rem;margin-top:6px;border-radius:8px;border:1px solid #e6eef0"></textarea></label>
+        <label style="display:block;margin-top:0.5rem"><small style="color:#666">Your message</small><textarea name="message" rows="4" style="width:100%;padding:0.6rem;margin-top:6px;border-radiu[...]
         <div style="display:flex;gap:0.5rem;justify-content:flex-end;margin-top:0.75rem">
-          <button id="prechat-offline" type="button" style="background:transparent;border:1px solid rgba(2,6,23,0.08);padding:0.5rem 0.8rem;border-radius:8px;cursor:pointer">Send offline message</button>
-          <button id="prechat-submit" type="submit" style="background:linear-gradient(90deg,var(--accent-2),var(--accent));border:0;padding:0.55rem 0.85rem;border-radius:8px;color:#022;font-weight:700;cursor:pointer">Start Chat</button>
+          <button id="prechat-offline" type="button" style="background:transparent;border:1px solid rgba(2,6,23,0.08);padding:0.5rem 0.8rem;border-radius:8px;cursor:pointer">Send offline message
+          <button id="prechat-submit" type="submit" style="background:linear-gradient(90deg,var(--accent-2),var(--accent));border:0;padding:0.55rem 0.85rem;border-radius:8px;color:#022;font-weigh[...]
         </div>
         <p id="prechat-note" style="margin-top:0.5rem;color:#666;font-size:0.9rem"></p>
       </form>
@@ -314,7 +315,7 @@
       const consent = localStorage.getItem('tradelearn_cookie_consent');
       if(consent === 'accepted' && inBusinessHours()){
         // do not open widget, just preload
-        var s = document.createElement('script'); s.async=true; s.src='https://embed.tawk.to/' + TAWK_ID + '/default'; s.charset='UTF-8'; s.setAttribute('crossorigin','*'); document.getElementsByTagName('head')[0].appendChild(s);
+        var s = document.createElement('script'); s.async=true; s.src='https://embed.tawk.to/' + TAWK_ID + '/default'; s.charset='UTF-8'; s.setAttribute('crossorigin','*'); document.getElementsBy[...]
         window.__tawk_loaded = true;
       }
     }catch(e){/* ignore */}
