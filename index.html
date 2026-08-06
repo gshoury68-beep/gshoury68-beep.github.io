@@ -182,7 +182,7 @@
   // Interactive behaviors: year, booking, video modal
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  const CALENDLY = { url: 'https://calendly.com/YOUR_CALENDLY_USERNAME/30min' };
+  const CALENDLY = { url: 'https://calendly.com/gshoury68' };
 
   (function initBooking(){
     const quick = document.getElementById('calendly-quick-link');
@@ -202,7 +202,7 @@
     ['book-intro','book-tech'].forEach(id => {
       const el = document.getElementById(id);
       if(!el) return;
-      el.addEventListener('click', (e)=>{ e.preventDefault(); if(CALENDLY.url.indexOf('YOUR_CALENDLY_USERNAME')===-1){ window.open(CALENDLY.url,'_blank','noopener'); } else { alert('Booking not configured.'); } });
+      el.addEventListener('click', (e)=>{ e.preventDefault(); if(CALENDLY.url.indexOf('YOUR_CALENDLY_USERNAME')===-1){ window.open(CALENDLY.url,'_blank','noopener'); } else { alert('Booking not c[...]
     });
   })();
 
@@ -217,7 +217,7 @@
     document.body.appendChild(modal);
     modal.addEventListener('click',(e)=>{ if(e.target===modal) closeModal(); });
     modal.querySelector('#modal-close').addEventListener('click', closeModal);
-    window.openVideo = function(yid){ const container = document.getElementById('video-container'); container.innerHTML = `<div style="position:relative;padding-top:56.25%"><iframe src="https://www.youtube.com/embed/${yid}?autoplay=1" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>`; modal.style.display='flex'; };
+    window.openVideo = function(yid){ const container = document.getElementById('video-container'); container.innerHTML = `<div style="position:relative;padding-top:56.25%"><iframe src="https://w[...]
     function closeModal(){ const modal = document.getElementById('video-modal'); modal.style.display='none'; const c=document.getElementById('video-container'); if(c) c.innerHTML=''; }
     window.closeVideo = closeModal;
   })();
